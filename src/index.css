@@ -1,0 +1,38 @@
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-family: "IBM Plex Mono", "Input Mono", "SF Mono", Consolas, monospace;
+  background-color: #f6f6f6;
+}
+
+.navbar {
+  margin-bottom: 20px;
+}
+
+.heading{
+  margin: 30px 0;
+  font-weight: 800;
+  font-size: 20px;
+}
+.searchbar{
+  width: 100%;
+  padding: 1vh 40vh;
+}
+.delete {
+  padding: 0 5px;
+}
+
+.edit {
+  padding: 0 5px;
+}
+
+a {
+  color: green;
+}
+.footer{
+  text-align: center;
+  font-size: 12px;
+}
+.logo {
+  height: 40px;
+}
