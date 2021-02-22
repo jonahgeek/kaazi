@@ -1,49 +1,37 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import {
-  BrowserRouter as Router,
-  Route,
-  Redirect,
-  Switch,
-} from "react-router-dom";
-import { Admin } from "./pages/Admin";
-import { history } from "./_helpers";
-import { alertActions } from "./_actions";
-import Login from "./pages/Auth/Login";
-import Register from "./pages/Auth/Register";
-
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { Provider } from "react-redux";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { LOGOUT } from "./actions/types";
+import store from "./store";
+import { loadUser } from "./actions/auth";
+import setAuthToken from "./utils/setAuthToken";
+import Landing from "./pages/Guest/Landing";
+import Routes from "./routing/Routes";
+import Navbar from "./components/layout/Navbar";
 
 function App() {
-  const dispatch = useDispatch();
-
   useEffect(() => {
-    history.listen((location, action) => {
-      dispatch(alertActions.clear());
+    //  🌽  check for token in the localStorage
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+    store.dispatch(loadUser());
+
+    // log user out from all tabs once one is logged out
+    window.addEventListener("storage", () => {
+      if (!localStorage.token) store.dispatch({ type: LOGOUT });
     });
   });
   return (
-    <>
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={true}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        pauseOnHover
-      />
-      <Router history={history}>
+    <Provider store={store}>
+      <Router>
+        <Navbar />
         <Switch>
-          <Route path="/account" render={(props) => <Admin {...props} />} />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
-          <Redirect from="*" to="/login" />
+          <Route exact path="/" component={Landing} />
+          <Route component={Routes} />
         </Switch>
       </Router>
-    </>
+    </Provider>
   );
 }
 
