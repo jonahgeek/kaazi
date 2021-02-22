@@ -1,5 +1,5 @@
 var config = {
-  API_URL: "https://optimaapp-backend.herokuapp.com/api",
+  API_URL: "http://localhost:5000/api",
 };
 
 export default config;

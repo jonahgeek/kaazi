@@ -6,12 +6,12 @@ import { userActions } from "../../_actions";
 
 const Login = () => {
   const [inputs, setInputs] = useState({
-    emailAddress: "",
+    emailaddress: "",
     password: "",
   });
 
   const [submitted, setSubmitted] = useState(false);
-  const { emailAddress, password } = inputs;
+  const { emailaddress, password } = inputs;
   const loggingIn = useSelector((state) => state.authentication.loggingIn);
   const dispatch = useDispatch();
 
@@ -32,8 +32,8 @@ const Login = () => {
     event.preventDefault();
 
     setSubmitted(true);
-    if (emailAddress && password) {
-      dispatch(userActions.login(emailAddress, password));
+    if (emailaddress && password) {
+      dispatch(userActions.login(emailaddress, password));
     }
     return submitted;
   }
@@ -58,8 +58,8 @@ const Login = () => {
                     type="text"
                     placeholder="email address"
                     className="form-control"
-                    name="emailAddress"
-                    value={emailAddress}
+                    name="emailaddress"
+                    value={emailaddress}
                     onChange={handleChange}
                   />
                 </div>

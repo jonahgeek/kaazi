@@ -11,17 +11,17 @@ export const userService = {
   delete: _delete,
 };
 
-function login(userdetail, password) {
+function login(emailaddress, password) {
   const requestOptions = {
     method: "POST",
     mode: "cors",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ userdetail, password }),
+    body: JSON.stringify({ emailaddress, password }),
   };
 
-  return fetch(`${config.API_URL}/user/login`, requestOptions)
+  return fetch(`${config.API_URL}/auth`, requestOptions)
     .then(handleResponse)
     .then((user) => {
       console.log({ user });
@@ -61,9 +61,7 @@ function register(user) {
     headers: { ...authHeader(), "Content-Type": "application/json" },
     body: JSON.stringify(user),
   };
-  return fetch(`${config.API_URL}/user/signup`, requestOptions).then(
-    handleResponse
-  );
+  return fetch(`${config.API_URL}/users`, requestOptions).then(handleResponse);
 }
 
 function update(user) {
