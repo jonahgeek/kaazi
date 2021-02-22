@@ -1,14 +1,37 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Link } from "react-router-dom";
-import { ArrowRightCircle } from "react-bootstrap-icons";
+import React, { useState } from "react";
+import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { login } from "../../actions/auth";
+import { ArrowRightCircle, Person } from "react-bootstrap-icons";
 
-const Login = () => {
+const Login = ({ login, isAuthenticated }) => {
+  const [formData, setFormData] = useState({
+    emailaddress: "",
+    password: "",
+  });
+
+  const { emailaddress, password } = formData;
+
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log(emailaddress, password)
+    login(emailaddress, password);
+  };
+
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
   return (
     <>
       <div className="row mt-5">
         <div className="offset-md-4 col-md">
-          <div class="login-form-1 mt-5 mx-5">
-            <form id="login-form" class="text-left">
+          <div class="login-form-1 mt-5 mx-5 text-center">
+            <h5><Person className="mx-1" />  Sign Into Your Account</h5>
+            <form id="login-form" class="text-left mt-3" onSubmit={onSubmit}>
               <div class="login-form-main-message"></div>
               <div class="main-login-form">
                 <div class="login-group">
@@ -21,6 +44,8 @@ const Login = () => {
                       class="form-control"
                       id="emailaddress"
                       name="emailaddress"
+                      value={emailaddress}
+                      onChange={onChange}
                       placeholder="Email Address"
                     />
                   </div>
@@ -33,6 +58,9 @@ const Login = () => {
                       class="form-control"
                       id="password"
                       name="password"
+                      value={password}
+                      onChange={onChange}
+                      minLength="6"
                       placeholder="Password"
                     />
                   </div>
@@ -57,4 +85,13 @@ const Login = () => {
   );
 };
 
-export default Login;
+Login.propTypes = {
+  login: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
+};
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { login })(Login);

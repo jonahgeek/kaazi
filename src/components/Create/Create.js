@@ -1,28 +1,31 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Gear, HddNetwork, People, Plus, Wallet2 } from "react-bootstrap-icons";
+
 
 const Create = () => {
   return (
     <>
-      <div className="card">
-        {/* <div className="card-header"><AiOutlineFileAdd/> Create New</div> */}
-        <div className="card-body">
-          {/* <Link to="/account/new-client">
-          <BsFillPersonPlusFill /> Client
-          </Link>
-          <br/>
-          <Link to="/account/new-invoice">
-            <FaFileInvoiceDollar /> Invoice
-          </Link>{" "}
-          <br />
-          <Link to="/account/new-quotation">
-            <FaQuoteLeft /> Quotation
-          </Link>{" "}
-          <br />
-          <Link to="/account/new-receipt">
-            <FaReceipt /> Receipt
-          </Link> */}
-        </div>
+      <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action">
+          <Plus className="mx-3" /> Create New Document
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+          <People className="mx-3"/> Contacts
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+         <HddNetwork className="mx-3" /> Connections
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+         <Wallet2 className="mx-3" /> Payments
+        </a>
+        <a
+          href="#"
+          class="list-group-item list-group-item-action disabled"
+          tabindex="-1"
+          aria-disabled="true"
+        >
+         <Gear className="mx-3" /> Settings
+        </a>
       </div>
     </>
   );

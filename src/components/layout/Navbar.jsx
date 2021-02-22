@@ -1,14 +1,19 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Back } from "react-bootstrap-icons";
+import { BoxArrowLeft } from "react-bootstrap-icons";
 import { logout } from "../../actions/auth";
 import Logo from "../../logo.png";
 
 const Navbar = ({ auth: { isAuthenticated }, logout }) => {
   const authLinks = (
     <ul class="nav justify-content-center">
+      <li class="nav-item dashboard">
+        <Link class="nav-link text-white" to="/dashboard">
+          Dashboard
+        </Link>
+      </li>
       <li class="nav-item">
         <Link class="nav-link text-white" to="/clients">
           Clients
@@ -31,7 +36,7 @@ const Navbar = ({ auth: { isAuthenticated }, logout }) => {
       </li>
       <li className="nav-item">
         <a onClick={logout} href="#!" className="nav-link text-white">
-          <Back />
+          <BoxArrowLeft className="mx-3" />
           <span className="hide-sm">Logout</span>
         </a>
       </li>
@@ -42,7 +47,7 @@ const Navbar = ({ auth: { isAuthenticated }, logout }) => {
     <ul class="nav justify-content-center">
       <li class="nav-item">
         <Link class="nav-link text-white" to="/donate">
-          Buy me a coffee 🍵
+          Buy me a coffee <span role="img" aria-label="coffee"> 🍵</span>
         </Link>
       </li>
       <li class="nav-item">

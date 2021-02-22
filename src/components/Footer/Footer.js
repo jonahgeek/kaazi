@@ -7,8 +7,7 @@ const Footer = () => {
       <div className="card">
         <div className="card-body">
           <div className="footer">
-            Kaazi was made by <a href="https://mwebaze.me">Jonahgeek</a>. Sure,
-            read the <a href="">FAQs</a>
+            Kaazi was made by <a href="https://mwebaze.me">Jonahgeek</a>.
           </div>
         </div>
       </div>
